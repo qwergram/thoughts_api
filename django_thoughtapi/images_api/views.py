@@ -42,7 +42,27 @@ def album_view(request, album_id=None):
 
 @login_required
 def photo_view(request, photo_id=None):
-    pass
+    if photo_id:
+        photo = get_object_or_404(Album, id=int(photo_id))
+        return render(
+            request,
+            "images_api/index.html",
+            {
+                "title": photo.title,
+                "content": "Photo by {}<br/>{} ".format(photo.owner.username, photo.description),
+                "images": [photo]
+            }
+        )
+    else:
+        return render(
+            request,
+            "images_api/index.html",
+            {
+                "title": "Photos".format(request.user.first_name),
+                "content": "There are currently {} photos.".format(len(Photo.objects.all())),
+                "images": Photo.objects.filter(owner=request.user).order_by("-date_uploaded"),
+            }
+        )
 
 @login_required
 def album_add(request):
