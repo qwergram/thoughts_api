@@ -44,4 +44,4 @@ class Album(models.Model):
     date_uploaded = models.DateTimeField(auto_now_add=True)
 
     photos = models.ManyToManyField('Photo', related_name='starred_in')
-    cover_photo = models.ForeignKey(Photo, blank=True, null=True)
+    photo = models.ForeignKey(Photo, blank=True, null=True)
