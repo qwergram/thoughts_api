@@ -29,6 +29,16 @@ def album_view(request, album_id=None):
                 "images": album.photos.all(),
             }
         )
+    else:
+        return render(
+            request,
+            "images_api/index.html",
+            {
+                "title": "Albums",
+                "content": "There are currently {} Albums.".format(len(Album.objects.all())),
+                "images": Album.objects.filter(published=PUBLIC),
+            }
+        )
 
 @login_required
 def photo_view(request, photo_id=None):
