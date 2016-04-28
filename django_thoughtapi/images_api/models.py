@@ -3,12 +3,10 @@ from django.db import models
 
 # Create your models here.
 
-PRIVATE = 'CLOSED'
 UNLISTED = 'UNLISTED'
-PUBLIC = 'OPEN'
+PUBLIC = 'PUBLIC'
 PRIVACY_CHOICES = (
-    (PRIVATE, 'Private'),
-    (UNLISTED, 'Shared'),
+    (UNLISTED, 'Unlisted'),
     (PUBLIC, 'Public')
 )
 
