@@ -64,9 +64,11 @@ def photo_view(request, photo_id=None):
             }
         )
 
+
 @login_required
 def album_add(request):
     pass
+
 
 @login_required
 def photo_add(request):
