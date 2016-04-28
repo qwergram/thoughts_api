@@ -24,8 +24,8 @@ class Photo(models.Model):
         return self.title
 
     owner = models.ForeignKey(settings.AUTH_USER_MODEL)
-    title = models.CharField(max_length=255, default="Example Title")
-    description = models.TextField(default="Write a short description about your photo!", max_length=1024)
+    title = models.CharField(max_length=255)
+    description = models.TextField(max_length=1024)
     published = models.CharField(choices=PRIVACY_CHOICES, max_length=255, default=PUBLIC)
 
     date_uploaded = models.DateTimeField(auto_now_add=True)
