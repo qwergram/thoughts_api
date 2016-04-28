@@ -18,7 +18,17 @@ def library_view(request):
 
 @login_required
 def album_view(request, album_id=None):
-    pass
+    if album_id:
+        album = get_object_or_404(Album, id=int(album_id))
+        return render(
+            request,
+            "images_api/index.html",
+            {
+                "title": album.title,
+                "content": "Album by {}<br/>{} ".format(album.owner.username, album.description),
+                "images": album.photos.all(),
+            }
+        )
 
 @login_required
 def photo_view(request, photo_id=None):
