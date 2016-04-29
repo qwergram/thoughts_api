@@ -73,14 +73,23 @@ def photo_view(request, photo_id=None):
 
 @login_required
 def album_add(request):
-    if request.method == 'GET':
-        return render(
-            request,
-            "images_api/album.html",
-            {
-                "form": NewAlbum()
-            }
-        )
+    if request.method == 'POST':
+
+        form = NewAlbum(request.user, request.POST, request.FILES, instance=Album(owner=request.user))
+        if form.is_valid():
+            form.owner = request.user
+            album = form.save()
+            return redirect("images:album_view", album_id=album.id)
+    else:
+        form = NewAlbum(request.user)
+
+    return render(
+        request,
+        "images_api/photo.html",
+        {
+            "form": form,
+        }
+    )
 
 
 @login_required
