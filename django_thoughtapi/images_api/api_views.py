@@ -1,13 +1,12 @@
-from django.contrib.auth.models import User
-from rest_framework import mixins, generics, permissions, renderers
 from .models import Photo, Album
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
+from django.http import HttpResponse
+from rest_framework.renderers import JSONRenderer
 
-@api_view(['GET'])
-def root(request, format=None):
-    return Response({
-        'users': reverse('user-list', request=request, format=format),
-        'snippets': reverse('snippet-list', request=request, format=format)
-    })
+class JSONResponse(HttpResponse):
+    """
+    An HttpResponse that renders its content into JSON.
+    """
+    def __init__(self, data, **kwargs):
+        content = JSONRenderer().render(data)
+        kwargs['content_type'] = 'application/json'
+        super(JSONResponse, self).__init__(content, **kwargs)
