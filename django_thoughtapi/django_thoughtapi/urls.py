@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from imagersite import settings
+from . import settings
 from django.conf.urls.static import static
 
 

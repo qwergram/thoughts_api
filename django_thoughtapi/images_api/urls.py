@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from . import views
 
-url_patterns = [
+urlpatterns = [
     url(r'library/$', views.library_view, name='library'),
     url(r'albums/$', views.album_view, name='albums_view'),
     url(r'albums/(?P<album_id>\d+)$', views.album_view, name='album_view'),
