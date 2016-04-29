@@ -1,0 +1,13 @@
+{% extends "images_api/index.html" %}
+
+{% block maincontent %}
+<h1>Upload a photo</h1>
+<p>Show the world your awesome</p>
+{{message | safe}}
+<form action="{{form.action}}" method="post" enctype="multipart/form-data">
+  {{form}}
+  {% csrf_token %}
+  <br>
+  <input type="submit" />
+</form>
+{% endblock %}
