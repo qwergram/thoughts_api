@@ -1,7 +1,6 @@
 from django import forms
 from .models import Photo, Album
 
-
 class NewPhoto(forms.ModelForm):
     class Meta:
         model = Photo
@@ -16,6 +15,7 @@ class NewAlbum(forms.ModelForm):
     def __init__(self, profile_=None, *args, **kwargs):
         super(NewAlbum, self).__init__(*args, **kwargs)
         self.fields['photos'].queryset = self.fields['photos'].queryset.filter(owner=profile_)
+        self.fields['photo'].queryset = self.fields['photo'].queryset.filter(owner=profile_)
 
 
 class EditProfile(forms.Form):
