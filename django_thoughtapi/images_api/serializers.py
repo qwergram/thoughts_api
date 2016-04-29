@@ -32,11 +32,7 @@ class AlbumSerializer(serializers.Serializer):
     date_uploaded = serializers.DateTimeField(read_only=True)
     photo = serializers.ImageField()
 
-    photos = serializers.HyperlinkedRelatedField(
-        many=True,
-        view_name='api:photo',
-        read_only=True,
-    )
+    photos = PhotoSerializer(many=True)
 
     def create(self, validated_data):
         return Album.objects.create(**validated_data)
