@@ -39,7 +39,12 @@
 					<section id="thumbnails">
 						{% for image in images %}
 							<article>
-								<a class="thumbnail" href="{{ image.photo.url }}" data-position="left center"><img src="{{ image.photo.url }}" alt="" /></a>
+								{# Very javascript like syntax here ... #}
+								{% if image.photo.photo %}
+									<a class="thumbnail" href="{{ image.photo.photo.url }}" data-position="left center"><img src="{{ image.photo.photo.url }}" alt="" /></a>
+								{% else %}
+									<a class="thumbnail" href="{{ image.photo.url }}" data-position="left center"><img src="{{ image.photo.url }}" alt="" /></a>
+								{% endif %}
 								<h2>{{ image.title }}</h2>
 								<p>{{ image.description }}</p>
 							</article>
