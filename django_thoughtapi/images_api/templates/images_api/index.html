@@ -34,6 +34,7 @@
 					</header>
 
 				<!-- Thumbnail -->
+				{% block maincontent %}
 					<section id="thumbnails">
 						{% for image in images %}
 							<article>
@@ -43,6 +44,7 @@
 							</article>
 						{% endfor %}
 					</section>
+				{% endblock %}
 
 				<!-- Footer -->
 					<footer id="footer">
