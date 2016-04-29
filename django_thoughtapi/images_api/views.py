@@ -1,7 +1,9 @@
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
-from django.contrib.auth.decorators import login_required
 from .models import Photo, Album, PUBLIC
+from .forms import EditProfile
 
 # Create your views here.
 
@@ -77,3 +79,21 @@ def album_add(request):
 @login_required
 def photo_add(request):
     raise Http404
+
+
+@login_required
+def profile_view(request, profile_id=None):
+    if profile_id is None:
+        user = request.user
+    else:
+        user = get_object_or_404(settings.AUTH_USER_MODEL, pk=profile_id)
+
+    return render(
+        request,
+        "images_api/index.html",
+        {
+            "title": "{} {} ({})".format(user.first_name, user.last_name, user.username),
+            "content": "",
+            "images": Photo.objects.filter(owner=user),
+        }
+    )
