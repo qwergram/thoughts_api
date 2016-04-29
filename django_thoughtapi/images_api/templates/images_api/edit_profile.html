@@ -1,0 +1,13 @@
+{% extends "images_api/index.html" %}
+
+{% block maincontent %}
+<h1>{{user.username}}'s Profile</h1>
+<p>Edit your profile!</p>
+{{message | safe}}
+<form action="{{form.action}}" method="post">
+  {{form}}
+  {% csrf_token %}
+  <br>
+  <input type="submit" />
+</form>
+{% endblock %}
