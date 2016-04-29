@@ -9,4 +9,8 @@ urlpatterns = [
     url(r'photos/$', views.photo_view, name='photos_view'),
     url(r'photos/(?P<photo_id>\d+)$', views.photo_view, name='photo_view'),
     url(r'photos/add/$', views.photo_add, name='photo_add'),
+
+    url(r'profile/$', views.profile_view, name='profile_view'),
+    url(r'profile/(?P<profile_id>\d+)$', views.profile_view, name='profile_view'),
+    url(r'profile/edit/$', views.profile_edit, name='profile_edit'),
 ]
