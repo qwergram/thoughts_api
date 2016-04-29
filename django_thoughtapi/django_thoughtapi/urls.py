@@ -26,7 +26,7 @@ urlpatterns = [
 ]
 
 apipatterns = [
-    url(r'^api/v1/', include('images_api.apis', namesapce='api'))
+    url(r'^api/v1/', include('images_api.apis', namespace='api'))
 ]
 
 
