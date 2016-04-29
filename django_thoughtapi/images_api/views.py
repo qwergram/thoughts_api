@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from .models import Photo, Album, PUBLIC
 
 # Create your views here.
+
 
 @login_required
 def library_view(request):
@@ -15,6 +17,7 @@ def library_view(request):
             "images": Photo.objects.filter(published=PUBLIC).order_by("-date_uploaded")[:10],
         }
     )
+
 
 @login_required
 def album_view(request, album_id=None):
@@ -39,6 +42,7 @@ def album_view(request, album_id=None):
                 "images": Album.objects.filter(published=PUBLIC),
             }
         )
+
 
 @login_required
 def photo_view(request, photo_id=None):
@@ -67,9 +71,9 @@ def photo_view(request, photo_id=None):
 
 @login_required
 def album_add(request):
-    pass
+    raise Http404
 
 
 @login_required
 def photo_add(request):
-    pass
+    raise Http404
