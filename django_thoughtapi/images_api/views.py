@@ -122,6 +122,7 @@ def profile_edit(request):
         else:
             message = "Whoops!"
     else:
+        message = ""
         form = EditProfile(initial={
             'first_name': user.first_name,
             'last_name': user.last_name,
