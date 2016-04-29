@@ -124,3 +124,15 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.environ.get('STATIC_ROOT', './static/')
 MEDIA_ROOT = os.environ.get('MEDIA_ROOT', './')
+
+
+ACCOUNT_ACTIVATION_DAYS = 7
+LOGIN_REDIRECT_URL = '/profile/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
+EMAIL_HOST_USER = os.environ.get('EMAIL_ADDR', 'titan')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_ADDR', 'titan')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS', 'password')
+EMAIL_USE_TLS = True
