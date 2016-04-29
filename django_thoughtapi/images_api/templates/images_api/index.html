@@ -56,12 +56,14 @@
 							{% if user.is_authenticated %}
 								<li><a href="{% url "images:library" %}">Images</a></li>
 								<li><a href="{% url "images:albums_view" %}">Albums</a></li>
+								<li><a href="{% url "images:album_add" %}">Add Albums</a></li>
+								<li><a href="{% url "images:photo_add" %}">Add Photos</a></li>
 								<li><a href="{% url "images:self_view" %}">Your Images</a></li>
 								<li><a href="{% url "images:profile_edit" %}">Your Profile</a></li>
 								<li><a href="{% url "auth_logout" %}">Logout</a></li>
 							{% else %}
-									<li><a href="{% url "auth_login" %}">Login</a></li>
-									<li><a href="{% url "registration_register" %}">Register</a></li>
+								<li><a href="{% url "auth_login" %}">Login</a></li>
+								<li><a href="{% url "registration_register" %}">Register</a></li>
 							{% endif %}
 						</ul>
 					</footer>
