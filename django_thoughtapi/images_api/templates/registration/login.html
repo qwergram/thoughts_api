@@ -1,6 +1,8 @@
 {% extends "images_api/index.html" %}
 
 {% block maincontent %}
+<h1>Please Login</h1>
+<p>There are a lot of cool things you can see when you login</p>
 <form action="{{form.action}}" method="post">
   {{form}}
   {% csrf_token %}
