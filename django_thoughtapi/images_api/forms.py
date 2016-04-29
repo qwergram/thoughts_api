@@ -23,5 +23,3 @@ class EditProfile(forms.Form):
     first_name = forms.CharField()
     last_name = forms.CharField()
     email = forms.EmailField()
-    password = forms.CharField()
-    password2 = forms.CharField()
