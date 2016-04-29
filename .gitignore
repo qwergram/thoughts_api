@@ -67,3 +67,5 @@ target/
 secrets.sh
 db.sqlite3
 media/
+share/
+include/

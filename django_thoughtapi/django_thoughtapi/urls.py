@@ -17,12 +17,15 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from . import settings
 from django.conf.urls.static import static
-
+from images_api.views import temporary_root
 
 urlpatterns = [
+    url(r'^$', temporary_root, name='root'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^images/', include('images_api.urls', namespace="images")),
+] + [
+    url(r'^api/v1/', include('images_api.apis', namespace='api'))
 ]
 
 
