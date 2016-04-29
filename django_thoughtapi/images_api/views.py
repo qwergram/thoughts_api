@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404
+from django.middleware.csrf import get_token
 from .models import Photo, Album, PUBLIC
 from .forms import EditProfile
 
@@ -90,7 +91,7 @@ def profile_view(request, profile_id=None):
             "images_api/index.html",
             {
                 "title": "{} {} ({})".format(user.first_name, user.last_name, user.username),
-                "content": "Titan has uploaded {} photos.".format(len(Photo.objects.filter(owner=user))),
+                "content": "{} has uploaded {} photos.".format(user.username, len(Photo.objects.filter(owner=user))),
                 "images": Photo.objects.filter(owner=user),
             }
         )
@@ -101,7 +102,39 @@ def profile_view(request, profile_id=None):
             "images_api/index.html",
             {
                 "title": "{} {} ({})".format(user.first_name, user.last_name, user.username),
-                "content": "Titan has uploaded {} photos.".format(len(Photo.objects.filter(owner=user))),
+                "content": "{} has uploaded {} photos.".format(user.username, len(Photo.objects.filter(owner=user))),
                 "images": Photo.objects.filter(owner=user).filter(published=PUBLIC),
             }
         )
+
+
+@login_required
+def profile_edit(request):
+    user = request.user
+    if request.method == 'POST':
+        form = EditProfile(request.POST)
+        if form.is_valid():
+            message = "You've updated your profile!"
+            user.first_name = form.cleaned_data.get('first_name')
+            user.last_name = form.cleaned_data.get('last_name')
+            user.email = form.cleaned_data.get('email')
+            user.save()
+        else:
+            message = "Whoops!"
+    else:
+        form = EditProfile(initial={
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'email': user.email
+        })
+
+    return render(
+        request,
+        "images_api/edit_profile.html",
+        {
+            "title": "{} {} ({})".format(user.first_name, user.last_name, user.username),
+            "message": message,
+            "images": Photo.objects.filter(owner=user),
+            "form": form,
+        }
+    )
