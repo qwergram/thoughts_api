@@ -38,5 +38,5 @@ def photo(request):
 def album(request):
     if request.method == 'GET':
         albums = Album.objects.filter(published=PUBLIC).order_by("-date_uploaded")
-        serializer = AlbumSerializer(albums, many=True)
+        serializer = AlbumSerializer(albums, many=True, context={'request': request})
         return JSONResponse(serializer.data)
