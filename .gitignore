@@ -65,3 +65,5 @@ target/
 .ipynb_checkpoints
 
 secrets.sh
+db.sqlite3
+media/
