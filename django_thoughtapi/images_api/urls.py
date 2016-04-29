@@ -12,5 +12,5 @@ urlpatterns = [
 
     url(r'profile/$', views.profile_view, name='self_view'),
     url(r'profile/(?P<profile_id>\d+)$', views.profile_view, name='profile_view'),
-    # url(r'profile/edit/$', views.profile_edit, name='profile_edit'),
+    url(r'profile/edit/$', views.profile_edit, name='profile_edit'),
 ]
