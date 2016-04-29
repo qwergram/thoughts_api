@@ -90,70 +90,58 @@ class SingleAlbumTestCase(TestCase):
         for title in self.photo_titles:
             self.assertTrue(self.album.photos.filter(title=title))
 
-#     def test_album_contains_attributes(self):
-#         self.assertTrue(hasattr(self.album, 'title'))
-#         self.assertTrue(hasattr(self.album, 'description'))
-#         self.assertTrue(hasattr(self.album, 'photos'))
-#         self.assertTrue(hasattr(self.album, 'latest_modified'))
-#         self.assertTrue(hasattr(self.album, 'latest_uploaded'))
-#         self.assertTrue(hasattr(self.album, 'latest_published'))
-#         self.assertTrue(hasattr(self.album, 'add_photo'))
-#         self.assertTrue(hasattr(self.album, 'cover_photo'))
-#         self.assertTrue(hasattr(self.album, 'published'))
-#
-#
-# class SingleImageTestCase(TestCase):
-#
-#     def setUp(self):
-#         self.norton = UserFactory.create()
-#         self.norton.save()
-#         self.norton = self.norton.profile
-#         self.photo = PhotoFactory(
-#             owner=self.norton
-#         )
-#
-#         self.photo.save()
-#
-#     def test_user_created(self):
-#         self.assertTrue(self.norton.pk)
-#
-#     def test_photo_meta_created(self):
-#         self.assertTrue(hasattr(self.photo, 'pk'))
-#         self.assertTrue(hasattr(self.photo, 'title'))
-#         self.assertTrue(hasattr(self.photo, 'description'))
-#         self.assertTrue(hasattr(self.photo, 'date_uploaded'))
-#         self.assertTrue(hasattr(self.photo, 'date_modified'))
-#         self.assertTrue(hasattr(self.photo, 'date_published'))
-#         self.assertTrue(hasattr(self.photo, 'published'))
-#         self.assertTrue(hasattr(self.photo, 'photo'))
-#
-#     def test_pk_assigned(self):
-#         self.assertTrue(self.photo.pk)
-#
-#     def test_title_is_str(self):
-#         self.assertEqual(self.photo.title, str(self.photo))
-#
-#     def test_owner_bind_exists(self):
-#         self.assertTrue(hasattr(self.photo, 'owner'))
-#
-#     def test_owner_bind_is_correct(self):
-#         self.assertEqual(self.photo.owner, self.norton)
-#
-#     def test_date_metas(self):
-#         import datetime
-#         self.assertTrue(isinstance(self.photo.date_uploaded, datetime.datetime))
-#         self.assertTrue(isinstance(self.photo.date_modified, datetime.datetime))
-#
-#     def test_published_date_is_false(self):
-#         import datetime
-#         self.assertFalse(isinstance(self.photo.date_published, datetime.datetime))
-#
-#     def test_photo_upload_exists(self):
-#         self.assertTrue(self.photo.photo)
-#
-#     def test_photo_upload_correctly(self):
-#         self.assertTrue(self.photo.photo.read() == TINY_IMAGE)
-#
-#     def test_photo_attributes_exist(self):
-#         self.assertTrue(hasattr(self.photo.photo, 'url'))
-#         self.assertTrue(hasattr(self.photo.photo, 'path'))
+    def test_album_contains_attributes(self):
+        self.assertTrue(hasattr(self.album, 'title'))
+        self.assertTrue(hasattr(self.album, 'description'))
+        self.assertTrue(hasattr(self.album, 'photos'))
+        self.assertTrue(hasattr(self.album, 'photo'))
+        self.assertTrue(hasattr(self.album, 'published'))
+
+
+class SingleImageTestCase(TestCase):
+
+    def setUp(self):
+        self.norton = UserFactory.create()
+        self.norton.save()
+        self.photo = PhotoFactory(
+            owner=self.norton
+        )
+
+        self.photo.save()
+
+    def test_user_created(self):
+        self.assertTrue(self.norton.pk)
+
+    def test_photo_meta_created(self):
+        self.assertTrue(hasattr(self.photo, 'pk'))
+        self.assertTrue(hasattr(self.photo, 'title'))
+        self.assertTrue(hasattr(self.photo, 'description'))
+        self.assertTrue(hasattr(self.photo, 'date_uploaded'))
+        self.assertTrue(hasattr(self.photo, 'published'))
+        self.assertTrue(hasattr(self.photo, 'photo'))
+
+    def test_pk_assigned(self):
+        self.assertTrue(self.photo.pk)
+
+    def test_title_is_str(self):
+        self.assertEqual(self.photo.title, str(self.photo))
+
+    def test_owner_bind_exists(self):
+        self.assertTrue(hasattr(self.photo, 'owner'))
+
+    def test_owner_bind_is_correct(self):
+        self.assertEqual(self.photo.owner, self.norton)
+
+    def test_date_metas(self):
+        import datetime
+        self.assertTrue(isinstance(self.photo.date_uploaded, datetime.datetime))
+
+    def test_photo_upload_exists(self):
+        self.assertTrue(self.photo.photo)
+
+    def test_photo_upload_correctly(self):
+        self.assertTrue(self.photo.photo.read() == TINY_IMAGE)
+
+    def test_photo_attributes_exist(self):
+        self.assertTrue(hasattr(self.photo.photo, 'url'))
+        self.assertTrue(hasattr(self.photo.photo, 'path'))
