@@ -127,7 +127,7 @@ MEDIA_ROOT = os.environ.get('MEDIA_ROOT', './')
 
 
 ACCOUNT_ACTIVATION_DAYS = 7
-LOGIN_REDIRECT_URL = '/profile/'
+LOGIN_REDIRECT_URL = '/images/profile/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
