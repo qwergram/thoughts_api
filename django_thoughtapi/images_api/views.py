@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
@@ -136,7 +137,7 @@ def profile_view(request, profile_id=None):
             }
         )
     else:
-        user = get_object_or_404(settings.AUTH_USER_MODEL, pk=profile_id)
+        user = get_object_or_404(User, pk=profile_id)
         return render(
             request,
             "images_api/index.html",
