@@ -25,6 +25,10 @@ urlpatterns = [
     url(r'^images/', include('images_api.urls', namespace="images")),
 ]
 
+apipatterns = [
+    url(r'^api/v1/', include('images_api.apis', namesapce='api'))
+]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
