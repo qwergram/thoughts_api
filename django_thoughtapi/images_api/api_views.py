@@ -1,13 +1,11 @@
 from .models import Photo, Album, PUBLIC
 from .forms import NewPhoto, NewAlbum
-from rest_framework import permissions
 from .serializers import PhotoSerializer, AlbumSerializer
 from django.http import HttpResponse
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
 import json
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+
 
 class JSONResponse(HttpResponse):
     """
@@ -67,4 +65,5 @@ def login(request):
 
 @csrf_exempt
 def logout(request):
-    pass
+    logout(request)
+    return JSONResponse({'status': 'success'})
