@@ -23,9 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^images/', include('images_api.urls', namespace="images")),
-]
-
-apipatterns = [
+] + [
     url(r'^api/v1/', include('images_api.apis', namespace='api'))
 ]
 
