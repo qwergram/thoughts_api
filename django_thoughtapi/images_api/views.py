@@ -1,10 +1,9 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
-from django.middleware.csrf import get_token
 from .models import Photo, Album, PUBLIC
-from .forms import EditProfile
+from .forms import EditProfile, NewPhoto, NewAlbum
 
 # Create your views here.
 
@@ -50,7 +49,7 @@ def album_view(request, album_id=None):
 @login_required
 def photo_view(request, photo_id=None):
     if photo_id:
-        photo = get_object_or_404(Album, id=int(photo_id))
+        photo = get_object_or_404(Photo, id=int(photo_id))
         return render(
             request,
             "images_api/index.html",
@@ -74,12 +73,40 @@ def photo_view(request, photo_id=None):
 
 @login_required
 def album_add(request):
-    raise Http404
+    if request.method == 'GET':
+        return render(
+            request,
+            "images_api/album.html",
+            {
+                "form": NewAlbum()
+            }
+        )
 
 
 @login_required
 def photo_add(request):
-    raise Http404
+    if request.method == 'POST':
+        form = NewPhoto(request.POST, request.FILES)
+        if form.is_valid():
+            photo = Photo(
+                title=form.cleaned_data['title'],
+                description=form.cleaned_data['description'],
+                published=form.cleaned_data['published'],
+                photo=form.cleaned_data['photo'],
+            )
+            photo.owner = request.user
+            photo.save()
+            return redirect("images:photo_view", photo_id=photo.id)
+    else:
+        form = NewPhoto()
+
+    return render(
+        request,
+        "images_api/photo.html",
+        {
+            "form": form,
+        }
+    )
 
 
 @login_required
