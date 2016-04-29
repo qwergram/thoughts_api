@@ -1,0 +1,9 @@
+{% extends "images_api/index.html" %}
+
+{% block maincontent %}
+<form action="{{form.action}}" method="post">
+  {{form}}
+  {% csrf_token %}
+  <input type="submit" />
+</form>
+{% endblock %}
