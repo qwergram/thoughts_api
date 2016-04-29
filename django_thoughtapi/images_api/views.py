@@ -8,6 +8,10 @@ from .forms import EditProfile, NewPhoto, NewAlbum
 # Create your views here.
 
 
+def temporary_root(request):
+    return redirect('images:library')
+
+
 @login_required
 def library_view(request):
     return render(
