@@ -7,7 +7,7 @@ respawn
 setuid ubuntu
 setgid ubuntu
 chdir "{{ django_home }}/django_thoughtapi/"
-eexport EMAIL_HOST="smtp.gmail.com"
+env EMAIL_HOST="smtp.gmail.com"
 env EMAIL_PORT="{{ EMAIL_PORT }}"
 env EMAIL_ADDR="{{ EMAIL_ADDR }}"
 env EMAIL_PASS="{{ EMAIL_PASS }}"
