@@ -70,7 +70,7 @@
     DB_PORT: "{{ DB_PORT }}"
     DB_HOST: "{{ DB_HOST }}"
   django_manage:
-    app_path: "{{ django_home }}"
+    app_path: "{{ django_home }}/django_thoughtapi"
     settings: django_thoughtapi.settings
     command: "migrate"
 
@@ -88,6 +88,6 @@
     DB_PORT: "{{ DB_PORT }}"
     DB_HOST: "{{ DB_HOST }}"
   django_manage:
-    app_path: "{{ django_home }}"
-    settings: django_thoughtapi.settings
-    command: collectstatic
+    app_path: "{{ django_home }}/django_thoughtapi"
+    settings: "django_thoughtapi.settings"
+    command: "collectstatic"
