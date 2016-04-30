@@ -1,12 +1,10 @@
 from .models import Photo, Album, PUBLIC
 from .forms import NewPhoto, NewAlbum
-from rest_framework import permissions
 from .serializers import PhotoSerializer, AlbumSerializer
 from django.http import HttpResponse
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
 import json
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate, login, logout
 
 
 class JSONResponse(HttpResponse):
@@ -28,7 +26,7 @@ def root(request):
             return JSONResponse(serializer.data)
         elif request.method == 'POST':
             photo = NewPhoto(request.POST, request.FILES)
-    return JSONResponse({'error': 'please login'}, status=403)
+    return JSONResponse({'error': 'please login @ /api/v1/login/'}, status=403)
 
 @csrf_exempt
 def photo(request):
@@ -37,7 +35,7 @@ def photo(request):
             photos = Photo.objects.filter(published=PUBLIC).order_by("-date_uploaded")
             serializer = PhotoSerializer(photos, many=True)
             return JSONResponse(serializer.data)
-    return JSONResponse({'error': 'please login'}, status=403)
+    return JSONResponse({'error': 'please login @ /api/v1/login/'}, status=403)
 
 
 @csrf_exempt
@@ -47,4 +45,25 @@ def album(request):
             albums = Album.objects.filter(published=PUBLIC).order_by("-date_uploaded")
             serializer = AlbumSerializer(albums, many=True, context={'request': request})
             return JSONResponse(serializer.data)
-    return JSONResponse({'error': 'please login'}, status=403)
+    return JSONResponse({'error': 'please login @ /api/v1/login/'}, status=403)
+
+
+@csrf_exempt
+def login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            return JSONResponse({'status': 'success'})
+        else:
+            return JSONResponse({'status': 'account is no longer active'})
+    else:
+        return JSONResponse({'status': 'invalid login'})
+
+
+@csrf_exempt
+def logout(request):
+    logout(request)
+    return JSONResponse({'status': 'success'})
