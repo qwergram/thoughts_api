@@ -65,6 +65,8 @@ target/
 .ipynb_checkpoints
 
 secrets.sh
+secrets.yml
+MANIFEST
 db.sqlite3
 media/
 share/
