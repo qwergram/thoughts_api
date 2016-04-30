@@ -6,6 +6,6 @@ vpc_subnet_id: subnet-004cb076
 region: us-west-2
 instance_tags: {"Name": "CuriousAnsible"}
 root_ebs_size: 8
-zone: us-west-2a
+zone: us-west-2b
 instance_profile_name: ThoughtsAPI
 num_instances: 1
