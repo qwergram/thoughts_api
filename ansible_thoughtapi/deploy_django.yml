@@ -22,4 +22,4 @@
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
             }
           - location /static { alias {{ django_home }}/django_thoughtapi/static; }
-          - location /media { alias {{ django_home }}/django_thoughtapi/media; }
+          - location /media { alias {{ django_home }}/django_thoughtapi; }
