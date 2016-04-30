@@ -14,13 +14,14 @@
     - git
 
 - name: Clone Django Repository
-  git: repo=https://github.com/qwergram/thoughts_api.git dest=/home/ubuntu/thoughts_api/ force=yes
+  # command: cd /home/ubuntu/
+  git: repo=https://github.com/qwergram/thoughts_api.git dest={{django_home}} force=yes
 
 - name: Install Python Dependencies
   sudo: yes
   pip:
     state: present
-    requirements: "{{ django_home }}requirements.txt"
+    requirements: "{{ django_home }}/requirements.txt"
 
 - name: Get DB Hostvars
   set_fact:
